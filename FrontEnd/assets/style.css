@@ -90,11 +90,12 @@ video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-
+	text-decoration: none;
+	color:black;
 }
 
 * {
-	box-sizing: boder-box;
+	box-sizing: border-box;
 }
 
 .choice {
@@ -279,6 +280,7 @@ li button:hover {
 
 .gallery img {
 	width: 100%;
+	height: 100%;
 
 }
 
@@ -362,7 +364,7 @@ footer nav ul {
 	color: white;
 	border: none;
 	background-color: black;
-	font-family: Work Sans;
+	font-family: 'Work Sans';
 	font-size: 15px;
 	font-weight: 400;
 	text-align: center;
@@ -376,7 +378,7 @@ footer nav ul {
 }
 
 .publish {
-	font-family: work sans;
+	font-family: 'work sans';
 	background-color: white;
 	display: flex;
 	justify-content: center;
@@ -408,7 +410,7 @@ footer nav ul {
 	color: rgb(0, 0, 0);
 	border: none;
 	background-color: rgb(255, 255, 255);
-	font-family: Work Sans;
+	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
@@ -455,32 +457,34 @@ footer nav ul {
 	overflow: auto;
 	width: 600px;
 	height: 731px;
-	max-width: calc(100vh-20px);
-	max-height: calc(100vh-20px);
+	max-width: 631px;
+	max-height: 731px;
 	padding: 20px;
 	background-color: #ffff;
 }
 
 .cross {
-	display: flex;
-	justify-content: end;
 	border: none;
 	background-color: white;
+	width: 10px;
+	position: relative;
+	right: -545px;
 }
 
 .arrowback {
-	display: flex;
-	justify-content: start;
 	border: none;
 	background-color: white;
+	position: absolute;
+	width: 10px;
 }
 
-#titlemodal {
+#titlemodal,
+#titlemodal2 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: black;
-	margin-top: 16px;
+	margin-top: 50px;
 }
 
 .container-picture {
@@ -499,13 +503,25 @@ footer nav ul {
 .picture {
 	width: 78px;
 	height: 104px;
-	
+
 
 }
 
 .add-picture {
 	display: flex;
 	justify-content: center;
+}
+
+.block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #E8F1F7;
+	height: 169px;
+	width: 420px;
+	margin: auto;
+	border-radius: 3px;
 }
 
 .plus-picture {
@@ -560,15 +576,19 @@ footer nav ul {
 	background: #CBD6DC;
 	width: 173px;
 	height: 36px;
+	cursor: pointer;
 }
-.valider{
+
+
+.valider {
 	background: #A7A7A7;
 	border-radius: 60px;
 	width: 237px;
-	height:36px;
-	color:white;
+	height: 36px;
+	color: white;
 	margin: auto;
 }
+
 .delete-gallery {
 	display: flex;
 	justify-content: center;
@@ -582,14 +602,16 @@ footer nav ul {
 	text-align: center;
 
 }
-.logobin{
+
+.logobin {
 	position: relative;
-    right: -56px;
-    top: -116px;
+	right: -56px;
+	top: -116px;
 	border-radius: 2px;
 	cursor: pointer;
 }
-.preview-image{
+
+.preview-image {
 	visibility: hidden;
 	position: absolute;
 	height: 168px;
@@ -597,11 +619,12 @@ footer nav ul {
 	background-color: #fff;
 }
 
-.preview-image img{
-height: 100%;
-z-index: 60;
-background-color: #ffffff;
+.preview-image img {
+	height: 100%;
+	z-index: 60;
+	background-color: #ffffff;
 }
-.login-title{
+
+.login-title {
 	text-align: center;
 }

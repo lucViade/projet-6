@@ -192,13 +192,8 @@ const openModal = function (e) {
 
 const closeModal = function (e) {
     if (modal === null) return
-    e.preventDefault()
+   /* e.preventDefault()*/
     modal.style.display = "none"
-    modal.setAttribute('aria-modal', 'true')
-    modal.removeAttribute('aria-modal')
-    modal.removeEventListener('click', closeModal)
-    modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
 }
 
@@ -211,11 +206,10 @@ allModals.forEach((modal) => {
     modal.querySelectorAll('.js-modal-close').forEach((element) => {
         element.addEventListener('click', () => {
             modal.style.display = "none"
-            // modal.setAttribute('aria-modal', 'true')
-            // modal.removeAttribute('aria-modal')
         })
     })
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+
 })
 
 
@@ -230,15 +224,19 @@ window.addEventListener('keydown', function (e) {
     }
 })
 
+
 const openAddPicture = document.querySelector('.add-picture')
+
 
 openAddPicture.addEventListener('click', openModal)
 
 
 
+
+
 // fetch suppression travaux
 const fetchDelete = (id) => {
-    fetch("http://localhost:5678/api/works/"+id, {
+    fetch("http://localhost:5678/api/works/" + id, {
         method: "DELETE",
         headers: {
             accept: "*/*",
@@ -248,13 +246,6 @@ const fetchDelete = (id) => {
         mode: "cors",
     })
         .then((response) => response.json())
-        // .then((res) => {
-        //     if (res.confirmation === "ok") {
-        //         id.remove();
-        //     }
-        //     console.log(res);
-        // })
-        // .catch((err) => console.log("Il y a eu une erreur sur le Fetch:" + err));
 };
 
 const deleteMsg = document.querySelector(".delete-msg");
@@ -273,53 +264,21 @@ function bindDeleteWorks(imgValue) {
                 .catch((error) => {
                     window.alert("Une erreur est survenue")
                 })
-            /*const idRemove = document.getElementById(e.target.id);
-            const portofolioRemove = document.getElementById(e.target.id+".");
-            fetchDelete(parseInt(e.target.id));
-            console.log(e.target.id);
-            //idRemove.remove();
-            deleteMsg.innerText = "Supprimé!";
-            setTimeout(()=>{
-                deleteMsg.innerText = "";
-            }, 3000);
-            */
         })
     })
 }
 
 
 
-
-/*function bindDeleteWorks() {
-    const deleteWork = document.querySelectorAll('.logobin')
-    deleteWork.forEach(element => {
-        element.addEventListener('click', () => {
-            fetch({
-                url: "http://localhost:5678/api/works/{id}",
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    accept: "*",
-                }
-            }).then((response) => {
-                console.log(response);
-            })
-        })
-
-    })
-}*/
-
-
-
-
 const addPicModal = document.querySelector(".input-addpic")
 const previewImg = document.querySelector(".import-pictures")
+const ajoutPhoto = document.querySelector(".block")
 const addTitle = document.querySelector(".title")
 const addCategorie = document.querySelector(".category")
 const submit = document.querySelector(".valider")
 const msgError = document.querySelector(".msg-error")
 const form = document.querySelector(".formmodal2")
-const token = localStorage.token;
+const token = localStorage.token
 console.log(form)
 
 
@@ -327,11 +286,13 @@ function addImage() {
     // Ajout images
     addPicModal.addEventListener("input", (e) => {
         console.log(addPicModal.files[0]);
-        imgPreview = e.target.files[0];
+        inputImg= e.target.files[0];
         const photo = URL.createObjectURL(addPicModal.files[0]);
-        // console.log(img)
+        // console.log(photo)
         previewImg.src = photo;
         previewImg.style.setProperty("visibility", "visible");
+        ajoutPhoto.style.display = "none"
+
     });
 
     //Titre
@@ -412,3 +373,31 @@ function addImage() {
 
 
 addImage()
+
+
+
+
+const arrowBack = document.querySelector('.arrowback')
+arrowBack.addEventListener('click', function () {
+    if (isPreviewVisible()) { 
+        closeImage()
+    }
+    else {
+        closeModal()
+    }
+})
+  
+
+function isPreviewVisible() {
+    return ajoutPhoto.style.display == "none"
+}
+function closeImage() {
+    previewImg.style.display = "none"
+    ajoutPhoto.style.display = "flex"
+}
+function openImage() {
+    previewImg.style.display = "flex"
+    ajoutPhoto.style.display = "none"
+}
+
+

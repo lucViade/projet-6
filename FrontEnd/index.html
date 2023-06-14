@@ -15,53 +15,53 @@
 
 <body>
 
-	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal"
-		style="display:none;">
+	<aside id="modal1" class="modal" aria-hidden="true" aria-labelledby="titlemodal" style="display:none;">
 		<div class="modal-wrapper js-modal-stop">
 			<button class="cross js-modal-close"><img src="./assets/icons/cross.svg" alt="cross"></button>
 			<h2 id="titlemodal">Galerie photo</h2>
 			<p class="delete-msg"></p>
 			<div class="container-picture">
 			</div>
-
-			<input href="#modal2" class="add-picture" type="submit" value="Ajouter une photo">
+			<input class="add-picture" type="submit" value="Ajouter une photo" href="#modal2">
 			<p class="delete-gallery">Supprimer la galerie</p>
+		</div>
 	</aside>
 
-	<aside id="modal2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal"
+	<aside id="modal2" class="modal" aria-hidden="true" aria-labelledby="titlemodal2"
 		style="display:none;">
-
-			<div class="modal-wrapper js-modal-stop">
-				<button class="arrowback js-modal-close"> <img src="./assets/icons/Arrow_Back.svg"
-						alt="arrowback"></button>
-				<button class="cross js-modal-close"> <img src="./assets/icons/cross.svg" alt="cross"></button>
-				<h2 id="titlemodal">Ajout photo</h2>
-				<div class="plus-picture ">
-					<div class="preview-image"><img alt="imguser" src="" class="import-pictures">
-					</div>
-						<img class="icon-picture" src="./assets/icons/picture.svg" alt="picture">
+		<div class="modal-wrapper js-modal-stop">
+			<button class="arrowback"> <img src="./assets/icons/Arrow_Back.svg" alt="arrowback"></button>
+			<button class="cross js-modal-close"> <img src="./assets/icons/cross.svg" alt="cross"></button>
+			<h2 id="titlemodal2">Ajout photo</h2>
+			<div class="plus-picture ">
+				<div class="preview-image"><img alt="imguser" src="" class="import-pictures">
+				</div>
+				<div class="block">
+					<img class="icon-picture" src="./assets/icons/picture.svg" alt="picture">
 					<label class="label-addpic" for="addPic">+ Ajouter photo</label>
-					<input type="file" class="input-addpic" id="addPic" name="addPic" accept="jpg/png" style="display:none">
+					<input type="file" class="input-addpic" id="addPic" name="addPic" accept="jpg/png"
+						style="display:none">
 					<p>jpg, png : 4mo max</p>
 				</div>
-				<div class="form-container">
-					<form class="formmodal2" method="post">
-						<label class="titlelabel" for="title">Titre</label>
-						<input class="title" id="title" type="text">
-						<label class="titlelabel" for="category">Catégorie</label>
-						<select class="category" id="category" name="category">
-							<option value=""> </option>
-							<option id="1" class="selectcategory">Objets</option>
-							<option id="2" class="selectcategory">Appartements</option>
-							<option id="3" class="selectcategory">Hotels & Restaurants</option>
-						</select>
-						<div class="separator"></div>
-
-						<button type="submit" class="valider">Valider</button>
-					</form>
-				</div>
-				<p class="msg-error"></p>
 			</div>
+			<div class="form-container">
+				<form class="formmodal2" method="post">
+					<label class="titlelabel" for="title">Titre</label>
+					<input class="title" id="title" type="text">
+					<label class="titlelabel" for="category">Catégorie</label>
+					<select class="category" id="category" name="category">
+						<option value=""> </option>
+						<option id="1" class="selectcategory">Objets</option>
+						<option id="2" class="selectcategory">Appartements</option>
+						<option id="3" class="selectcategory">Hotels & Restaurants</option>
+					</select>
+					<div class="separator"></div>
+
+					<button type="submit" class="valider">Valider</button>
+				</form>
+			</div>
+			<p class="msg-error"></p>
+		</div>
 
 	</aside>
 

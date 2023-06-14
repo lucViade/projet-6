@@ -10,7 +10,7 @@ submit.addEventListener("click", function (e) {
 
 async function FetchUserLogin() {
     const email = document.getElementById("email").value;
-    const password = document.getElementById("mot de passe").value;
+    const password = document.getElementById("mot-de-passe").value;
     const errorMsg = document.querySelector(".erreur-msg");
     try {
         const response = await fetch('http://localhost:5678/api/users/login', {
