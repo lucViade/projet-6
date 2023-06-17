@@ -3,19 +3,18 @@ const gallery = document.querySelector(".gallery");
 const portfolio = document.querySelector("#portfolio");
 const filters = document.querySelector("#filters");
 const containerPicture = document.querySelector(".container-picture")
+let works = []
+let categoryIdFilter = undefined;
+
 console.log(gallery);
 console.log(portfolio);
 console.log(containerPicture)
 
-let works = []
-let categoryIdFilter = undefined;
 
+//recuperation des travaux      
 function reloadWorks() {
     gallery.replaceChildren();
 
-
-
-    //recuperation des travaux      
     works
         .filter((work) => {
             if (categoryIdFilter === undefined) {
@@ -41,6 +40,8 @@ function reloadWorks() {
         })
 
 }
+
+//récuperation des travaux pour la modal1
 function reloadWorksModal() {
     containerPicture.replaceChildren();
 
@@ -57,7 +58,6 @@ function reloadWorksModal() {
         img.className = "picture"
 
 
-
         const txt = document.createElement('p')
         txt.textContent = 'éditer';
 
@@ -72,7 +72,8 @@ function reloadWorksModal() {
     })
 }
 
-//appel de l'API avec Fetch
+//appel de l'API avec Fetch permettant la récupération des travaux "works" sur le backend
+
 const promise01 = fetch('http://localhost:5678/api/works');
 
 promise01
@@ -94,6 +95,8 @@ promise01
 
     })
 
+//appel de l'API avec Fetch permettant la récupération des categories "categories" sur le backend
+
 const promise02 = fetch('http://localhost:5678/api/categories');
 
 promise02
@@ -107,7 +110,7 @@ promise02
             console.log(categories[0]);
 
 
-
+            // création des boutons filtrant les travaux
             const all = document.createElement('li')
             const btnAll = document.createElement('button')
             btnAll.innerText = 'Tous';
@@ -120,9 +123,6 @@ promise02
             for (let i = 0; i < categories.length; i++) {
                 const category = categories[i];
 
-
-
-
                 const filter = document.createElement('li')
                 const buttonFilter = document.createElement('button')
                 buttonFilter.innerText = categories[i].name;
@@ -132,8 +132,7 @@ promise02
                 filters.appendChild(filter);
                 filter.appendChild(buttonFilter);
             }
-
-
+            //mise en place des filtres 
             const btns = document.getElementsByTagName("button")
 
             for (let i = 0; i < btns.length; i++) {
@@ -149,6 +148,8 @@ promise02
         })
     })
 
+
+// suite log in mise en place du mode édition
 const log = document.querySelector("#log");
 const banner = document.querySelector(".banner");
 const modifierContainer = document.querySelector(".modifier-container");
@@ -176,6 +177,9 @@ log.addEventListener("click", () => {
     log.innerText = "login";
 });
 
+
+// mise en place des modales
+
 const openModal = function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute('href'))
@@ -192,15 +196,17 @@ const openModal = function (e) {
 
 const closeModal = function (e) {
     if (modal === null) return
-   /* e.preventDefault()*/
+    /* e.preventDefault()*/
     modal.style.display = "none"
     modal = null
 }
-
+//pour stopper la fermeture au clique aléatoire dans les modales
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
+
+//mise en place de la fermeture des modale avec utilisation du bouton cross
 const allModals = document.querySelectorAll(".modal")
 allModals.forEach((modal) => {
     modal.querySelectorAll('.js-modal-close').forEach((element) => {
@@ -217,7 +223,7 @@ allModals.forEach((modal) => {
 document.querySelectorAll('.js-modal').forEach(a => {
     a.addEventListener('click', openModal)
 })
-
+//optionnel fermeture avec escape
 window.addEventListener('keydown', function (e) {
     if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
@@ -225,8 +231,8 @@ window.addEventListener('keydown', function (e) {
 })
 
 
+// ouverture de la modal2 a l'aide du bouton ajouter photo
 const openAddPicture = document.querySelector('.add-picture')
-
 
 openAddPicture.addEventListener('click', openModal)
 
@@ -249,7 +255,7 @@ const fetchDelete = (id) => {
 };
 
 const deleteMsg = document.querySelector(".delete-msg");
-//fonction suppression des images
+//fonction suppression des images grace à la poubelle.
 function bindDeleteWorks(imgValue) {
     const deleteWork = document.querySelectorAll('.logobin');
     deleteWork.forEach((delWork) => {
@@ -269,7 +275,7 @@ function bindDeleteWorks(imgValue) {
 }
 
 
-
+// mise en place de l'ajout d'image sur modale2
 const addPicModal = document.querySelector(".input-addpic")
 const previewImg = document.querySelector(".import-pictures")
 const ajoutPhoto = document.querySelector(".block")
@@ -286,7 +292,10 @@ function addImage() {
     // Ajout images
     addPicModal.addEventListener("input", (e) => {
         console.log(addPicModal.files[0]);
-        inputImg= e.target.files[0];
+
+        //creation de l'emplacement de l'image utilisateur
+        inputImg = e.target.files[0];
+
         const photo = URL.createObjectURL(addPicModal.files[0]);
         // console.log(photo)
         previewImg.src = photo;
@@ -308,7 +317,7 @@ function addImage() {
 
     // Si tout les elements sont remplies alors changements couleurs boutons !== (strictement different)
     form.addEventListener("change", () => {
-        if (imgPreview !== "" && inputTitle !== "" && inputCategory !== "") {
+        if (inputImg !== "" && inputTitle !== "" && inputCategory !== "") {
             submit.style.background = "#1D6154";
             submit.style.cursor = "pointer";
         }
@@ -321,15 +330,16 @@ function addImage() {
     //Submit
     submit.addEventListener("click", (e) => {
         e.preventDefault();
-        if (imgPreview && inputTitle && inputCategory) {
+        if (inputImg && inputTitle && inputCategory) {
             const formData = new FormData();
-            console.log(imgPreview, inputTitle, inputCategory);
-            formData.append("image", imgPreview);
+            console.log(inputImg, inputTitle, inputCategory);
+            formData.append("image", inputImg);
             formData.append("title", inputTitle);
             formData.append("category", inputCategory);
             console.log(formData);
 
             fetchDataSubmit()
+
             async function fetchDataSubmit() {
                 try {
                     // Fetch ajout des travaux
@@ -376,17 +386,17 @@ addImage()
 
 
 
-
+//fonction retour en cliquant sur fleche gauche
 const arrowBack = document.querySelector('.arrowback')
 arrowBack.addEventListener('click', function () {
-    if (isPreviewVisible()) { 
+    if (isPreviewVisible()) {
         closeImage()
     }
     else {
         closeModal()
     }
 })
-  
+
 
 function isPreviewVisible() {
     return ajoutPhoto.style.display == "none"
